@@ -1,0 +1,68 @@
+{
+	"请求成功失败比例" : {
+		"DNS Look CDN成功率" : {
+			"type" : "bool",
+			"collection" : "feedbacks",
+			"key"  : "dns_lookupopenboxcdnmobilem360cn.success",
+		},
+		"DNS Look 非CDN成功率" : {
+			"type" : "bool",
+			"collection" : "feedbacks",
+			"key"  : "dns_lookupopenboxmobilem360cn.success",
+		},
+		"Ping CDN成功率" : {
+			"type" : "bool",
+			"collection" : "feedbacks",
+			"key"  : "pingopenboxcdnmobilem360cn.success",
+		},
+		"Ping 非CDN成功率" : {
+			"type" : "bool",
+			"collection" : "feedbacks",
+			"key"  : "pingopenboxmobilem360cn.success",
+		},
+		"动态接口查询成功率" : {
+			"type" : "bool",
+			"collection" : "feedbacks",
+			"key"  : "httpinewgetRecomendApps.success",
+		},
+		"静态接口查询成功率" : {
+			"type" : "bool",
+			"collection" : "feedbacks",
+			"key"  : "httphtmllifeindexhtml.success",
+		},
+		"apk接口查询成功率" : {
+			"type" : "bool",
+			"collection" : "feedbacks",
+			"key"  : "httphtmllifeindexhtml.success",
+		}
+	},
+	"接口速度" : {
+		"动态页接口速度" : {
+			"type" : "int",
+			"collection" : "feedbacks",
+			"key"  : "httpinewgetRecomendApps.speed",
+		},
+		"静态页接口速度" : {
+			"type" : "int",
+			"collection" : "feedbacks",
+			"key"  : "httphtmllifeindexhtml.speed",
+		},
+		"apk接口速度" : {
+			"type" : "int",
+			"collection" : "feedbacks",
+			"key"  : "httpapk.speed",
+		}
+	},
+	"解析时间" : {
+		"DNS Lookup CDN解析时间" : {
+			"type" : "int",
+			"collection" : "feedbacks",
+			"key"  : "dns_lookupopenboxcdnmobilem360cn.values.time_ms",
+		},
+		"DNS Lookup 非CDN解析时间" : {
+			"type" : "int",
+			"collection" : "feedbacks",
+			"key"  : "dns_lookupopenboxmobilem360cn.values.time_ms",
+		}
+	}
+}
