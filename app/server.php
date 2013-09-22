@@ -11,5 +11,5 @@ return array(
         'timeout' => 3
     ),
     
-    'statpot' => ROOT_PATH . '/app/statpot.json',
+    'statpot' => ROOT_PATH . '/app/statpot.php',
 );

@@ -30,7 +30,7 @@ $serverConfig = require_once(ROOT_PATH . "/app/server.php");
 
 SMongo::genInstance($serverConfig['mongo']);
 
-$statpot = json_decode($serverConfig['statpot'], true);
+$statpot = require_once(ROOT_PATH . $serverConfig['statpot']);
 $report = new SReport($statpot);
 
 // 渲染html页面
