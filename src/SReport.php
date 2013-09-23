@@ -31,9 +31,9 @@ class SReport
 
     public function html()
     {
-        // TODO: 生成HTML
+        // 生成HTML
 
-        $html .= '<!DOCTYPE html>
+        $html = '<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <!-- Meta, title, CSS, favicons, etc. -->

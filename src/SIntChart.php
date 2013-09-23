@@ -27,15 +27,15 @@ class SIntChart extends SChart
 
         // 获取最小值和最大值
         $findOption = array(
-            {$this->key} => array('$exists' => true)
+            $this->key => array('$exists' => true)
         );
 
         $minSort = array(
-            {$this->key} => 1
+            $this->key => 1
         );
 
         $maxSort = array(
-            {$this->key} => -1
+            $this->key => -1
         );
 
         $minFeedback = $collection->find($findOption)->sort($minSort)->limit(1)->getNext();
@@ -55,7 +55,7 @@ class SIntChart extends SChart
         while ($high <= $this->max) {
             $high = $low + $this->step;
             $countOption = array(
-                {$this->kind} => array(
+                $this->kind => array(
                     '$gte' => $low,
                     '$lt' => $high,
                 ),

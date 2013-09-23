@@ -15,7 +15,7 @@ Class SMongo
         $server = "mongodb://{$mongoConfig['host']}:{$mongoConfig['port']}";
         $options = array(
             'db' => $mongoConfig['db'],
-            'timeout' => empty($mongoConfig['timeout']) ? 3 : $mongoConfig['timeout'],
+            //'timeout' => empty($mongoConfig['timeout']) ? 3 : $mongoConfig['timeout'],
         );
 
         if (!empty($mongoConfig['username'])) {
@@ -26,7 +26,12 @@ Class SMongo
             $options['password'] = $mongoConfig['password'];
         }
 
-        self::$_mongo = new SMongo($server, $options);
+        $class = 'MongoClient'; 
+        if(!class_exists($class)){ 
+            $class = 'Mongo'; 
+        }
+
+        self::$_mongo = new $class($server, $options);
         self::$_mongoConfig = $mongoConfig;
     }
 

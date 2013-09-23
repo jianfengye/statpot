@@ -13,7 +13,7 @@ if ($phpversion[0] < 5 || $phpversion[1] < 2) {
     throw new Exception("PHP version need bigger than 5.3");
 }
 
-define("ROOT_PATH", dirname(dirname("__FILE__")));
+define("ROOT_PATH", dirname(dirname(__FILE__)));
 
 date_default_timezone_set("PRC");
 
@@ -30,7 +30,7 @@ $serverConfig = require_once(ROOT_PATH . "/app/server.php");
 
 SMongo::genInstance($serverConfig['mongo']);
 
-$statpot = require_once(ROOT_PATH . $serverConfig['statpot']);
+$statpot = require_once($serverConfig['statpot']);
 $report = new SReport($statpot);
 
 // 渲染html页面

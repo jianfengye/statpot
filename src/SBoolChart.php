@@ -23,17 +23,17 @@ class SBoolChart extends SChart
         $collection = $mongo->{$this->collection};
 
         $trueOption = array(
-            {$this->key} => true
+            $this->key => true
         );
         $this->trueCount = $collection->count($trueOption);
 
         $falseOption = array(
-            {$this->key} => false
+            $this->key => false
         );
         $this->falseCount = $collection->count($falseOption);
     
         $noneOption = array(
-            {$this->key} => array(
+            $this->key => array(
                 '$exists' => false
             ),
         );
