@@ -41,12 +41,12 @@ class SIntChart extends SChart
         $minFeedback = $collection->find($findOption)->sort($minSort)->limit(1)->getNext();
         // TODO：这个方法有点挫，可以改进
         $this->min = $this->getField($minFeedback, $this->key);
-
+print_r($this->min);exit;
         $maxFeedback = $collection->find($findOption)->sort($maxSort)->limit(1)->getNext();
         $this->max = $this->getField($maxFeedback, $this->key);
 
         if (empty($this->step)) {
-            $this->step = ($this->max - $this->min) / 10;
+            $this->step = ($this->max - $this->min) / 3;
         }
 
         $low = $this->min;
@@ -55,17 +55,18 @@ class SIntChart extends SChart
         while ($high <= $this->max) {
             $high = $low + $this->step;
             $countOption = array(
-                $this->kind => array(
+                $this->key => array(
                     '$gte' => $low,
                     '$lt' => $high,
                 ),
             );
             $count = $collection->count($countOption);
             $stepCounts[] = array(
-                'min' => $min,
-                'max' => $max,
+                'min' => $this->min,
+                'max' => $this->max,
                 'count' => $count,
             );
+            $low = $high;
         }
         $this->stepCounts = $stepCounts;
     }
@@ -137,8 +138,8 @@ class SIntChart extends SChart
         //计算chart_xAxis和chart_data
         $chart_xAxis = '';
         $chart_data = array();
-        foreach ($stepCounts as $item) {
-            $chart_xAxis .= sprintf('"%s-%s",', $item['min'], $item['max']);
+        foreach ($this->stepCounts as $item) {
+            $chart_xAxis .= sprintf('"%.2f-%.2f",', $item['min'], $item['max']);
             $chart_data[] = $item['count'];
         }
 

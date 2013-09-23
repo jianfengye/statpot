@@ -48,7 +48,7 @@ class SBoolChart extends SChart
         $html = '<script type="text/javascript">
 (function($){
 $(function () {
-    $("{{$chart_id}}").highcharts({
+    $("#{{$chart_id}}").highcharts({
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -86,7 +86,8 @@ $(function () {
 <div id="{{$chart_id}}" style="min-width: 310px; height: 400px; margin: 0 auto"></div>';
 
         //计算chart_data
-        $chart_data = "['成功' : {$this->trueCount}], ['失败' : {$this->falseCount}],['无值' : {$this->noneCount}],";
+        $chart_data = "['成功' : {$this->trueCount}], ['失败' : {$this->falseCount}],['无值' : {$this->noneCount}]";
+
         $chart_title = empty($option['chart_title']) ? '比率表' : $option['chart_title'];
         $search = array('{{$chart_id}}', '{{$chart_title}}', '{{$chart_data}}');
         $replace = array($chart_id, $chart_title, $chart_data);

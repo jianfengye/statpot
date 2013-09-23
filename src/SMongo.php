@@ -31,7 +31,9 @@ Class SMongo
             $class = 'Mongo'; 
         }
 
+        $db = $mongoConfig['db'];
         self::$_mongo = new $class($server, $options);
+        self::$_mongo = self::$_mongo->$db;
         self::$_mongoConfig = $mongoConfig;
     }
 

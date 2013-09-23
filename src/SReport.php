@@ -32,7 +32,6 @@ class SReport
     public function html()
     {
         // 生成HTML
-
         $html = '<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -116,8 +115,9 @@ class SReport
                 $option = array(
                     'title' => $subtitle,
                 );
-                $chart_html = $stat['chartObj']->html($subtitle_id, $option);
 
+                $chart_html = $stat['chartObj']->html($subtitle_id, $option);
+print_r($chart_html);exit;
                 $html .= sprintf($temp, $subtitle_id, $subtitle, $chart_html);
             }
             $html .= '</div>';
