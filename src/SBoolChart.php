@@ -83,10 +83,10 @@ $(function () {
 });
 })(jQuery);
 </script>
-<div id="{{$chart_id}}" style="min-width: 310px; height: 400px; margin: 0 auto"></div>';
+<div id="{{$chart_id}}" style="min-width: 210px; height: 300px; margin: 0 auto"></div>';
 
         //计算chart_data
-        $chart_data = "['成功' : {$this->trueCount}], ['失败' : {$this->falseCount}],['无值' : {$this->noneCount}]";
+        $chart_data = "['成功', {$this->trueCount}], ['失败', {$this->falseCount}],['无值', {$this->noneCount}]";
 
         $chart_title = empty($option['chart_title']) ? '比率表' : $option['chart_title'];
         $search = array('{{$chart_id}}', '{{$chart_title}}', '{{$chart_data}}');

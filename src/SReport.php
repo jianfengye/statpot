@@ -109,7 +109,7 @@ class SReport
 
             foreach ($stats as $subtitle => $stat) {
                 $subtitle_id = md5($title . $subtitle);
-                $temp = '<h3 id="%s">%s</h3>%s';
+                $temp = '<h3>%s</h3>%s';
 
                 // 获取子类的分类
                 $option = array(
@@ -117,8 +117,7 @@ class SReport
                 );
 
                 $chart_html = $stat['chartObj']->html($subtitle_id, $option);
-print_r($chart_html);exit;
-                $html .= sprintf($temp, $subtitle_id, $subtitle, $chart_html);
+                $html .= sprintf($temp, $subtitle, $chart_html);
             }
             $html .= '</div>';
         }
