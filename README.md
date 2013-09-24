@@ -106,7 +106,7 @@ statpot.php是个二级目录配置文件，对应生成页面的左边导航
 # License
 [The MIT License (MIT)](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2013 Eric Zhang
+Copyright (c) 2013 Jianfeng Ye
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
