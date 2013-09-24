@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>统计 &middot; 报表</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="http://v3.bootcss.com/dist/css/bootstrap.css" rel="stylesheet">
+
+  <!-- Documentation extras -->
+  <link href="http://v3.bootcss.com/assets/css/docs.css" rel="stylesheet">
+  <link href="http://v3.bootcss.com/assets/highlight/css/github.css" rel="stylesheet">
+
+  <script src="http://v3.bootcss.com/assets/js/jquery.js"></script>
+</head>
+<body>
+
+  <!-- Docs master nav -->
+  <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="#" class="navbar-brand">统计报表</a>
+      </div>
+    </div>
+  </header>
+            <!-- Callout for the old docs link -->
+  <div class="container bs-docs-container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="bs-sidebar hidden-print" role="complementary">
+          <ul class="nav bs-sidenav"><li>
+              <a href="#37ea66bd26708f923e052ecfa843ca63">请求成功失败比例</a><ul class="nav"><li>
+                  <a href="#aa0cfb7e1c4c6a5e0cfb1e2f9773a49d">DNS Look CDN成功率</a>
+                </li><li>
+                  <a href="#232320e529ec173707bfb972a86dc2c6">DNS Look 非CDN成功率</a>
+                </li></ul>
+            </li><li>
+              <a href="#01c983e32b56d0140aaaaa6a4a667c0d">接口速度</a><ul class="nav"><li>
+                  <a href="#adccd2d36fdda74501eda97c9891407e">动态页接口速度</a>
+                </li><li>
+                  <a href="#be8076112f63368f9a57c084276a94b8">静态页接口速度</a>
+                </li></ul>
+            </li></ul>
+        </div>
+      </div><div class="col-md-9" role="main"><div class="bs-docs-section">
+          <div class="page-header">
+            <h1 id="37ea66bd26708f923e052ecfa843ca63">请求成功失败比例</h1>
+          </div><h3>DNS Look CDN成功率</h3><script type="text/javascript">
+(function($){
+$(function () {
+    $("#aa0cfb7e1c4c6a5e0cfb1e2f9773a49d").highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: "比率表"
+        },
+        tooltip: {
+          pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>"
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: "pointer",
+                dataLabels: {
+                    enabled: true,
+                    color: "#000000",
+                    connectorColor: "#000000",
+                    format: "<b>{point.name}</b>: {point.percentage:.1f} %"
+                }
+            }
+        },
+        series: [{
+            type: "pie",
+            name: "比例",
+            data: [
+                ['成功', 7252], ['失败', 0],['无值', 2708]
+            ]
+        }]
+    });
+});
+})(jQuery);
+</script>
+<div id="aa0cfb7e1c4c6a5e0cfb1e2f9773a49d" style="min-width: 210px; height: 300px; margin: 0 auto"></div><h3>DNS Look 非CDN成功率</h3><script type="text/javascript">
+(function($){
+$(function () {
+    $("#232320e529ec173707bfb972a86dc2c6").highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: "比率表"
+        },
+        tooltip: {
+          pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>"
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: "pointer",
+                dataLabels: {
+                    enabled: true,
+                    color: "#000000",
+                    connectorColor: "#000000",
+                    format: "<b>{point.name}</b>: {point.percentage:.1f} %"
+                }
+            }
+        },
+        series: [{
+            type: "pie",
+            name: "比例",
+            data: [
+                ['成功', 5886], ['失败', 0],['无值', 4074]
+            ]
+        }]
+    });
+});
+})(jQuery);
+</script>
+<div id="232320e529ec173707bfb972a86dc2c6" style="min-width: 210px; height: 300px; margin: 0 auto"></div></div><div class="bs-docs-section">
+          <div class="page-header">
+            <h1 id="01c983e32b56d0140aaaaa6a4a667c0d">接口速度</h1>
+          </div><h3>动态页接口速度</h3><script type="text/javascript">
+            (function($){
+                      $(function () {
+                    $("#adccd2d36fdda74501eda97c9891407e").highcharts({
+                        chart: {
+                            type: "column"
+                        },
+                        title: {
+                            text: "分布表"
+                        },
+                        xAxis: {
+                            categories: [
+                                "0.03-69.28","69.28-138.52","138.52-207.76","207.76-277.01","277.01-346.25","346.25-415.49","415.49-484.74","484.74-553.98","553.98-623.22","623.22-692.47","692.47-761.71"
+                            ]
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: "次数"
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                            footerFormat: "</table>",
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: "分布表",
+                            data: [2462,836,588,523,325,168,97,32,19,6,1]
+                
+                        }]
+                    });
+                });
+            })(jQuery);
+            </script>
+            <div id="adccd2d36fdda74501eda97c9891407e" style="min-width: 210px; height: 300px; margin: 0 auto"></div><h3>静态页接口速度</h3><script type="text/javascript">
+            (function($){
+                      $(function () {
+                    $("#be8076112f63368f9a57c084276a94b8").highcharts({
+                        chart: {
+                            type: "column"
+                        },
+                        title: {
+                            text: "分布表"
+                        },
+                        xAxis: {
+                            categories: [
+                                "0.00-51.09","51.09-102.19","102.19-153.28","153.28-204.37","204.37-255.47","255.47-306.56","306.56-357.65","357.65-408.75","408.75-459.84","459.84-510.93","510.93-562.03"
+                            ]
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: "次数"
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                            footerFormat: "</table>",
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: "分布表",
+                            data: [3937,1027,222,66,33,14,4,3,1,1,1]
+                
+                        }]
+                    });
+                });
+            })(jQuery);
+            </script>
+            <div id="be8076112f63368f9a57c084276a94b8" style="min-width: 210px; height: 300px; margin: 0 auto"></div></div></div>
+    </div>
+  </div>
+
+  <!-- Footer
+    ================================================== -->
+  <footer class="bs-footer" role="contentinfo">
+    <div class="container">
+
+      <p>
+        Designed and built with statpot by
+        <a href="http://weibo.com/yjf10" target="_blank">@jianfengye110</a>
+        .
+      </p>
+      <p>
+        Code licensed under
+        <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>
+        , documentation under
+        <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
+        .
+      </p>
+    </div>
+  </footer>
+
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="http://code.highcharts.com/modules/exporting.js"></script>
+          
+  <script src="http://v3.bootcss.com/dist/js/bootstrap.js"></script>
+
+  <script src="http://v3.bootcss.com/assets/js/application.js"></script>
+
+</body>
+</html>
