@@ -40,12 +40,16 @@ class SIntChart extends SChart
             $this->key => -1
         );
 
-        $minFeedback = $collection->find($findOption)->sort($minSort)->limit(1)->getNext();
-        // TODO：这个方法有点挫，可以改进
-        $this->min = $this->getField($minFeedback, $this->key);
-
-        $maxFeedback = $collection->find($findOption)->sort($maxSort)->limit(1)->getNext();
-        $this->max = $this->getField($maxFeedback, $this->key);
+        if (empty($this->min)) {
+            $minFeedback = $collection->find($findOption)->sort($minSort)->limit(1)->getNext();
+            // TODO：这个方法有点挫，可以改进
+            $this->min = $this->getField($minFeedback, $this->key);
+        }
+        
+        if (empty($this->max)) {
+            $maxFeedback = $collection->find($findOption)->sort($maxSort)->limit(1)->getNext();
+            $this->max = $this->getField($maxFeedback, $this->key);
+        }
 
         if (empty($this->step)) {
             $this->step = ($this->max - $this->min) / 10;
@@ -56,20 +60,31 @@ class SIntChart extends SChart
         $stepCounts = array();
         while ($high <= $this->max) {
             $high = $low + $this->step;
-            $countOption = array(
-                $this->key => array(
-                    '$gte' => $low,
-                    '$lt' => $high,
-                ),
-            );
-            $count = $collection->count($countOption);
             $stepCounts[] = array(
                 'min' => $low,
                 'max' => $high,
-                'count' => $count,
+                'count' => 0,
             );
             $low = $high;
         }
+
+        $option = array(
+            $this->key => array(
+                '$gte' => $this->min,
+                '$lt' => $this->max,
+            ),
+        );
+        $items = $collection->find($option);
+        foreach ($items as $item) {
+            foreach ($stepCounts as $key => $stepChart) {
+                $keyval = $this->getField($item, $this->key);
+                if ($stepChart['min'] <= $keyval && $stepChart['max'] > $keyval) {
+                    $stepCounts[$key]['count']++;
+                    break;
+                }
+            }
+        }
+
         $this->stepCounts = $stepCounts;
     }
 
@@ -87,6 +102,17 @@ class SIntChart extends SChart
 
     public function html($chart_id, $option = array())
     {
+        // 如果有最小值和最大值
+        if (!empty($option['min'])) {
+            $this->min = $option['min'];
+        }
+        if (!empty($option['max'])) {
+            $this->max = $option['max'];
+        }
+        if (!empty($option['step'])) {
+            $this->step = $option['step'];
+        }
+
         // 生成统计数据
         $this->stat();
 
@@ -109,7 +135,7 @@ class SIntChart extends SChart
                         yAxis: {
                             min: 0,
                             title: {
-                                text: "次数"
+                                text: "{{$chart_yshow}}"
                             }
                         },
                         tooltip: {
@@ -148,9 +174,10 @@ class SIntChart extends SChart
         $chart_xAxis = trim($chart_xAxis, ',');
         $chart_data = implode(',', $chart_data);
 
-        $chart_title = empty($option['chart_title']) ? '分布表' : $option['chart_title'];
-        $search = array('{{$chart_id}}', '{{$chart_title}}', '{{$chart_xAxis}}', '{{$chart_data}}');
-        $replace = array($chart_id, $chart_title, $chart_xAxis, $chart_data);
+        $chart_title = empty($option['title']) ? '分布表' : $option['title'];
+        $chart_yshow = empty($option['y_show']) ? '次数' : $option['y_show'];
+        $search = array('{{$chart_id}}', '{{$chart_title}}', '{{$chart_xAxis}}', '{{$chart_data}}', '{{$chart_yshow}}');
+        $replace = array($chart_id, $chart_title, $chart_xAxis, $chart_data, $chart_yshow);
         return str_replace($search, $replace, $html);
     }
 }

@@ -22,11 +22,9 @@ statpot
  | - app #配置文件
       |- server.php #服务器配置
       |- statpot.php #生成的页面相关配置
- | - example      #生成的示例，无用
+ | - result      #生成的报表存放位置
  | - src   #statpot的代码文件库
  | - vender    #第三方库和资源
-        |- Bootstrap #bootstrap资源，暂时无用
-        |- Highchart #Highchart资源，暂时无用
  | - web     #网站入口
 ```
 
@@ -59,29 +57,41 @@ statpot.php
 return array(
     "请求成功失败比例" => array(
         "DNS Look CDN成功率" => array(
-            "type" => "bool",
+            "type" => "SEnumChart",
+            "title" => "DNS Look CDN",
             "collection" => "feedbacks",
             "key" => "dnscdn.success",
+            "enum_show" => array(
+                '1' => '成功',
+                '0' => '失败',
+                null => '无数据'
+            ),
         ),
         "DNS Look 非CDN成功率" => array(
-            "type" => "bool",
+            "type" => "SEnumChart",
             "collection" => "feedbacks",
             "key" => "dnsnocdn.success",
         ),
     ),
     "接口速度" => array(
         "动态页接口速度" => array(
-            "type" => "int",
+            "type" => "SIntChart",
             "collection" => "feedbacks",
             "key" => "phpapi.speed",
+            "title" => "动态接口速度",
+            "y_show" => "Kb/s",
+            "min" => 0,
+            "max" => 100,
+            "step" => 5,
         ),
         "静态页接口速度" => array(
-            "type" => "int",
+            "type" => "SIntChart",
             "collection" => "feedbacks",
             "key" => "htmlapi.speed",
         )
     ),
 );
+
 ```
 
 ## 生成页面
@@ -101,10 +111,17 @@ return array(
 statpot.php是个二级目录配置文件，对应生成页面的左边导航
 
 ### 字段含义
-+ type - 生成的图表类型，现在支持bool/int, 分别对应bool类饼图/int的区间柱状图
++ type - 生成的图表类型，现在支持 SEnumChart/SIntChart, 名字直接和实现类一致，这样添加一种实现之后不用修改其他类
 + collection - 对应的统计数据所在的mongo数据集中
 + key - 所需要生成的图表对应的mongo统计项
-+ step - int类型特有，区间柱状图步长，如果没有设置默认为(max-min)/10
+
+
++ y_show - SIntChart特有，y轴显示说明
++ min - SIntChart特有，最小值
++ max - SIntChart特有，最大值
++ step - SIntChart特有，区间柱状图步长，如果没有设置默认为(max-min)/10
+
++ enum_show - SEnumChart特有，枚举出现的每个值表现
 
 # License
 [The MIT License (MIT)](http://opensource.org/licenses/MIT)
