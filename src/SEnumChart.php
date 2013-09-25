@@ -1,13 +1,15 @@
 <?php
 
-// bool类型的图表
+// Enum类型的图表
 // 图表示例见：http://www.highcharts.com/demo/pie-basic
-class SBoolChart extends SChart
+class SEnumChart extends SChart
 {
     // 参数数据存储
     // 无
 
     // 解析后的数据存储
+    private $group;
+
     private $trueCount;
     private $falseCount;
     private $noneCount;
@@ -23,22 +25,20 @@ class SBoolChart extends SChart
         $mongo = SMongo::getInstance();
         $collection = $mongo->{$this->collection};
 
-        $trueOption = array(
-            $this->key => true
+        // 使用group来解析数据
+        $keys = array(
+            $this->key => 1
         );
-        $this->trueCount = $collection->count($trueOption);
 
-        $falseOption = array(
-            $this->key => false
+        $initial = array(
+            "count" => 0,
         );
-        $this->falseCount = $collection->count($falseOption);
-    
-        $noneOption = array(
-            $this->key => array(
-                '$exists' => false
-            ),
-        );
-        $this->noneCount = $collection->count($noneOption);
+
+        $reduce = "function(cur,prev) { prev.count=prev.count+1; }";
+
+        $group = $collection->group($keys, $initial, $reduce);
+        $this->group = $group['retval'];
+
     }
 
     // 生成对应的HTML
@@ -59,7 +59,7 @@ $(function () {
             text: "{{$chart_title}}"
         },
         tooltip: {
-          pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>"
+          pointFormat: "{series.name}: <b>{point.percentage:.1f}%<br/>{point.y}</b>"
         },
         plotOptions: {
             pie: {
@@ -87,9 +87,28 @@ $(function () {
 <div id="{{$chart_id}}" style="min-width: 210px; height: 300px; margin: 0 auto"></div>';
 
         //计算chart_data
-        $chart_data = "['成功', {$this->trueCount}], ['失败', {$this->falseCount}],['无值', {$this->noneCount}]";
+        $chart_data = '';
+        $enum_show = empty($option['enum_show']) ? array() : $option['enum_show'];
 
-        $chart_title = empty($option['chart_title']) ? '比率表' : $option['chart_title'];
+        foreach ($this->group as $item) {
+            $val = $item[$this->key];
+            $count = $item['count'];
+
+            if (isset($enum_show[$val])) {
+                $val = $enum_show[$val];
+            }
+
+            // 增加说明
+            if ($val == null) {
+                $val = 'null';
+            }
+
+            $chart_data .= "['{$val}', {$count}],";
+        }
+
+        $chart_data = trim($chart_data, ',');
+
+        $chart_title = empty($option['title']) ? '比率表' : $option['title'];
         $search = array('{{$chart_id}}', '{{$chart_title}}', '{{$chart_data}}');
         $replace = array($chart_id, $chart_title, $chart_data);
         return str_replace($search, $replace, $html);

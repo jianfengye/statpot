@@ -3,12 +3,18 @@
 return array(
 	"请求成功失败比例" => array(
 		"DNS Look CDN成功率" => array(
-			"type" => "SBoolChart",
+			"type" => "SEnumChart",
+			"title" => "DNS Look CDN",
 			"collection" => "feedbacks",
 			"key" => "dns_lookupcdn.success",
+			"enum_show" => array(
+				'1' => '成功',
+				'0' => '失败',
+				null => '无数据'
+			),
 		),
 		"DNS Look 非CDN成功率" => array(
-			"type" => "SBoolChart",
+			"type" => "SEnumChart",
 			"collection" => "feedbacks",
 			"key" => "dns_lookupnocdn.success",
 		),

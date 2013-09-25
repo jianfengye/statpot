@@ -107,9 +107,7 @@ class SReport
                 $temp = '<h3>%s</h3>%s';
 
                 // 获取子类的分类
-                $option = array(
-                    'title' => $subtitle,
-                );
+                $option = $stat;
 
                 $chart_html = $stat['chartObj']->html($subtitle_id, $option);
                 $html .= sprintf($temp, $subtitle, $chart_html);
