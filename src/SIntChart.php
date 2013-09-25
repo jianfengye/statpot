@@ -1,5 +1,7 @@
 <?php
 
+// 柱状图
+// 图表示例见：http://www.highcharts.com/demo/column-basic
 class SIntChart extends SChart
 {
     // 参数数据存储

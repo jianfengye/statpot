@@ -12,17 +12,12 @@ class SReport
         // 解析配置文件
         foreach ($statpot as $title => $stats) {
             foreach ($stats as $subtitle => $stat) {
-                switch ($stat['type']) {
-                    case 'bool':
-                        $charts[$title][$subtitle]['chartObj'] = new SBoolChart($stat);
-                        break;
-                    case 'int':
-                        $charts[$title][$subtitle]['chartObj'] = new SIntChart($stat);
-                        break;
-                    default:
-                        throw new Exception("Statpot Config type error");
-                        break;
+                $type = $stat['type'];
+                if (!class_exists($type)) {
+                    throw new Exception("Statpot Config type {$stat['type']} error");
                 }
+
+                $charts[$title][$subtitle]['chartObj'] = new $type($stat);
             }
         }
 

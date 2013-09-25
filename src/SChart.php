@@ -1,7 +1,7 @@
 <?php
 
 // 负责一个表单的基类
-class SChart 
+abstract class SChart 
 {
     protected $type;
     protected $key;
@@ -18,4 +18,7 @@ class SChart
         $this->key = $config['key'];
         $this->collection = $config['collection'];
     }
+
+    // 生成html页面
+    abstract public function html($chart_id, $option = array());
 }

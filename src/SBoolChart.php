@@ -1,6 +1,7 @@
 <?php
 
 // bool类型的图表
+// 图表示例见：http://www.highcharts.com/demo/pie-basic
 class SBoolChart extends SChart
 {
     // 参数数据存储
