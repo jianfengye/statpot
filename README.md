@@ -8,6 +8,9 @@ statpot - make reports generating simply and easier
 + 统计图表基于highCharts
 + 可后续自行增加统计图表类型，易于扩展
 
+# statpot报表示例
+![image](https://raw.github.com/jianfengye/rawdata/master/img/statpot_report.png)
+
 # statpot环境要求
 + 已搭建mongo数据库并存储数据
 + 已安装php并安装了mongo.so扩展

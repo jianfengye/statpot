@@ -3,14 +3,16 @@
 // 检测有没有安装mongo扩展
 if (!extension_loaded('mongo')) {
     if (!dl('mongo.so')) {
-        throw new Exception("Need install mongo.so extension");
+        echo 'Need install mongo.so extension';
+        exit;
     }
 }
 
 // 检测php版本是不是大于等于5.3
 $phpversion = explode('.', PHP_VERSION);
 if ($phpversion[0] < 5 || $phpversion[1] < 2) {
-    throw new Exception("PHP version need bigger than 5.3");
+    echo "PHP version need bigger than 5.3";
+    exit;
 }
 
 define("ROOT_PATH", dirname(dirname(__FILE__)));
